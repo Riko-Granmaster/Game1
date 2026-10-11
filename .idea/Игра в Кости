@@ -1,0 +1,45 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main3 {
+    public static void main(String[] args) {
+        Random rad = new Random();
+        Scanner scan = new Scanner(System.in);
+        int newr = rad.nextInt(100) + 1;// Диапозон значений от 1-100 (добавляем +1) так как начинается от 0 до 99
+        int popitka = 0;
+        int user1;
+        int bestResult= Integer.MAX_VALUE;
+        String d = scan.next();
+        System.out.println("Компютер загадал от 1 до 100. Попробуй угадать!");
+        do {
+            newr = rad.nextInt(100) + 1;
+            popitka = 0;
+
+            while (true) {
+                System.out.println("Введите число от 1 до 100");
+                user1 = scan.nextInt();
+                popitka++;
+
+                if (newr > user1) {
+                    System.out.println("Я сам в шоке, но загаданное число больше, брат");
+                } else if (newr < user1) {
+                    System.out.println("Не ожидал от тебя такого. Загаданное число меньше, брат");
+                } else {
+                    System.out.println("Winner. Кол-во попыток: " + popitka + ". Загаданное число: " + newr);
+                    if (popitka < bestResult) {
+                        bestResult = popitka;
+                        System.out.println("Новый рекорд: " + bestResult + " попыток!");
+                    }
+                    System.out.println("Количество попыток в лучшей игре: " + bestResult);
+                    break; // конец текущей партии
+                }
+            }
+
+            System.out.println("Сыграть ещё раз? (да/нет): ");
+            d = scan.next();
+        } while (d.equalsIgnoreCase("да"));
+
+        System.out.println("Спасибо за игру! Лучший результат: " + bestResult + " попыток.");
+        scan.close();
+    }
+}
